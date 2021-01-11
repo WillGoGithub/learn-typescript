@@ -9,3 +9,23 @@ absolutelyEitherNullOrString = null;
 
 // block-scope
 let name: string = 'ad';
+
+let nestedObj = {
+    prop: 'Hello',
+    child: {
+        prop1: 1,
+        prop2: false
+    }
+};
+
+let obj2 = { ...nestedObj, hi: '123' };
+
+// Object annotation
+
+let justAnObj: Object = { hello: 'World' };
+
+justAnObj.hello
+
+justAnObj = { hi: 'There' };
+
+justAnObj.hi
