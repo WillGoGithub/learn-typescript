@@ -38,4 +38,21 @@ justAnObj = function () { };
 
 justAnObj = new Object();
 
+// function annotation
 
+let f1 = function f1() {
+    return undefined;
+};
+
+let f2 = function f2(): undefined {
+    return undefined
+};
+
+let f3 = function f3(): undefined {
+
+};
+
+// @ @ !
+let f4 = function f4(): void {
+    return undefined;
+}
