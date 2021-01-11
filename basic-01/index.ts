@@ -6,3 +6,6 @@ let absolutelyEitherNullOrString: string | null = null;
 
 absolutelyEitherNullOrString = 'string';
 absolutelyEitherNullOrString = null;
+
+// block-scope
+let name: string = 'ad';
