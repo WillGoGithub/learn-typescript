@@ -1,3 +1,8 @@
 // TDZ = Temporal dead zone
-let a: string;
-let b = a;
+let tdz: string;
+// let t = tdz;
+
+let absolutelyEitherNullOrString: string | null = null;
+
+absolutelyEitherNullOrString = 'string';
+absolutelyEitherNullOrString = null;
