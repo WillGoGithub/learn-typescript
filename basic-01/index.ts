@@ -56,3 +56,6 @@ let f3 = function f3(): undefined {
 let f4 = function f4(): void {
     return undefined;
 }
+
+// Array
+let canBeEitherNullOrNumbers: (number | null)[] = [1, 2, 4];
