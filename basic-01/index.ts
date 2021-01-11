@@ -22,10 +22,20 @@ let obj2 = { ...nestedObj, hi: '123' };
 
 // Object annotation
 
-let justAnObj: Object = { hello: 'World' };
+let justAnObj: object = { hello: 'World' };
 
-justAnObj.hello
+// justAnObj.hello
 
 justAnObj = { hi: 'There' };
 
-justAnObj.hi
+// justAnObj.hi
+
+justAnObj = 123
+
+justAnObj = [1, '2', true, { hello: 'Go' }];
+
+justAnObj = function () { };
+
+justAnObj = new Object();
+
+
