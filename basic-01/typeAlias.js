@@ -10,5 +10,4 @@ var BMwMotorJson = {
 var returnTupleFunction = function () {
     return ["str", 1];
 };
-console.log(returnTupleFunction()[0]);
-console.log(returnTupleFunction()[1]);
+console.log(returnTupleFunction());
