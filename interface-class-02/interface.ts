@@ -54,3 +54,4 @@ const toby: Person = {
     age: 54,
     hasPet: 'aa'
 };
+
