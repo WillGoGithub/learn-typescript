@@ -88,4 +88,4 @@ parsedFromNormalJSONParse.message;
 
 // Safe-Counterpart
 let parsedFromSafeJSONParse = safelyParseJSON(randomJSONString);
-parsedFromNormalJSONParse.message;
+parsedFromSafeJSONParse.message;
