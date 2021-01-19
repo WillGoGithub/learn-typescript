@@ -40,3 +40,23 @@ interface MergingInterface {
     createElement(tag: 'input'): HTMLInputElement;
     
 }
+
+// Namespace with interface 
+// 避免第三方套件汙染到全域
+namespace StupidFramework {
+    interface StupidRequest {
+        headers: Headers[];
+        body: Body;
+        url: string;
+        method: 'GET' | 'POST' | 'DELETE';
+    }
+}
+
+// In other file
+type QueryDictionary = { [propName: string]: string };
+
+namespace StupidFramework {
+    interface StupidRequest {
+        query?: QueryDictionary
+    }
+}
