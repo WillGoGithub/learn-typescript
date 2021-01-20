@@ -21,7 +21,7 @@ interface I1x2 extends I1, I2 { }
 
 interface I2x3 extends I2, I3 { }
 
-interface I1x3 extends I1, I3 {}
+interface I1x3 extends I1, I3 { }
 
 interface I1x2x3 extends I1, I2, I3 { }
 
@@ -30,5 +30,5 @@ interface I1x2x3 extends I1, I2, I3 { }
 // 型別（Type）的意義 —— 代表靜態的資料型態，因此型別一但被定義出來則恆為固定的狀態。
 // 儘管可以利用型態的複合（intersection 與 union）看似達到型別擴展的感覺，然而這個行為並不叫作型別擴展，而是創造出新的靜態型別
 
-// Code against interface, not implementation: 
+// Code against interface, not implementation:
 // Decouple every part of your code and compose from them, instead of short - lived implementation.
