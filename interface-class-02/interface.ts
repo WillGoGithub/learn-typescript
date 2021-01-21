@@ -1,12 +1,15 @@
 enum Gender { Male, Female, Other };
 
+// Interface 介面的意義是規格
+// Type 型別的意義則是靜態的物件型別格式
+
 interface UserInfo {
     id: number;
     name: string;
 
     birth: Date;
     interests: string[];
-    
+
     gender: Gender;
 
     address: {
