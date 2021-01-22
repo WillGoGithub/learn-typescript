@@ -49,5 +49,4 @@ let wrongStringTypedArray: StringTypedList = {
 };
 
 // [keyName: TKey]: TValue
-// TKey 必須為 number 或者是 string 其中一種，不能為其他型別與 number 和 string 的複合格式（連 number | string 是不接受的！）
-// TValue 可為任意型別
+// TKey 必須為 number 或者是 string 其中一種，不能為其他型別與 number 和 string 的複合格式（連 number | string 是不接受的！)
