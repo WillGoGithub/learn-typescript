@@ -15,9 +15,6 @@ type UserAccount = {
 // }
 
 interface AccountSystem {
-    users: UserAccount[] | undefined;
-    currentUser: UserAccount | undefined;
-
     signIn(account: string, password: string): void;
     signOut(): void;
 }
@@ -31,15 +28,11 @@ interface ATM extends AccountSystem, TransactionSystem { }
 
 // ===========
 class RealATM implements ATM {
-    users: UserAccount[] = [
-        { account: 'A', password: '123', money: 1_000_000 },
-        { account: 'B', password: '123', money: 2_000_000 },
-        { account: 'C', password: '123', money: 3_000_000 },
-    ];
+    constructor(private users: UserAccount[]) { }
 
-    currentUser: UserAccount | undefined;
+    private currentUser: UserAccount | undefined;
 
-    signIn(account: string, password: string): void {
+    public signIn(account: string, password: string): void {
         this.currentUser = this.users.find(
             user => user.account === account &&
             user.password === password
@@ -50,15 +43,28 @@ class RealATM implements ATM {
         }
     }
 
-    signOut(): void {
-        throw new Error("Method not implemented.");
+    public signOut(): void {
+        this.currentUser = undefined;
     }
 
-    deposit(amount: number): void {
-        throw new Error("Method not implemented.");
+    public deposit(amount: number): void {
+        if (!this.currentUser) {
+            throw new Error('No user signed in !');
+        }
+
+        this.currentUser.money += amount;
     }
 
-    withdraw(amount: number): void {
-        throw new Error("Method not implemented.");
+    public withdraw(amount: number): void {
+        if (!this.currentUser) {
+            throw new Error('No user signed in !');
+        }
+
+        this.currentUser.money -= amount;
     }
 }
+
+// 若宣告某類別 C，則裡面的成員變數 P 或成員方法 M 被註記為：
+// public 模式時：P 與 M 可以任意在類別內外以及繼承 C 的子類別使用
+// private 模式時：P 與 M 僅僅只能在當前類別 C 內部使用
+// protected 模式時： P 與 M 除了當前類別 C 內部使用外，繼承 C 的子類別也可以使用
