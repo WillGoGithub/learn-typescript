@@ -40,3 +40,10 @@ class TicketSystem {
         `);
     }
 }
+
+const ticket = new TicketSystem(
+    TransportTicketType.Train,
+    'Tainan',
+    'Kaohsiung',
+    new Date(2019, 8, 1, 9, 0, 0),
+);
