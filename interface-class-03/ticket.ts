@@ -6,6 +6,40 @@ enum TransportTicketType {
 
 type TimeFormat = [number, number, number];
 
+type TrainStation = {
+    name: TrainStops,
+    nextStop: TrainStops,
+    duration: TimeFormat,
+};
+
+enum TrainStops {
+    Pingtung,
+    Kaohsiung,
+    Tainan,
+    Taichung,
+    Hsinchu,
+    Taipei
+};
+
+let a = [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }];
+
+class TrainTicket {
+    private trainStationsDetail: Map<TrainStation> = new Map([
+        [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }],
+        { name: TrainStops.Kaohsiung, nextStop: TrainStops.Tainan, duration: [1, 45, 30] },
+        { name: TrainStops.Tainan, nextStop: TrainStops.Taichung, duration: [3, 20, 0] },
+        { name: TrainStops.Taichung, nextStop: TrainStops.Hsinchu, duration: [2, 30, 30] },
+        { name: TrainStops.Hsinchu, nextStop: TrainStops.Taipei, duration: [1, 30, 30] },
+    ]);
+
+    private deriveDuration(): TimeFormat {
+        const { startingPoint, destination } = this;
+        let time: TimeFormat = [0, 0, 0];
+
+        return time;
+    }
+}
+
 class TicketSystem {
     constructor(
         private type: TransportTicketType,
