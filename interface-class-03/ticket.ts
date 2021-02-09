@@ -21,13 +21,11 @@ enum TrainStops {
     Taipei
 };
 
-let a = [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }];
-
 class TicketSystem {
     constructor(
         private type: TransportTicketType,
-        private startingPoint: string,
-        private destination: string,
+        protected startingPoint: TrainStops,
+        protected destination: TrainStops,
         private departureTime: Date,
     ) { }
 
@@ -51,7 +49,7 @@ class TicketSystem {
 
         console.log(`
             Ticket Type: ${ ticketName }
-            Station: ${ this.startingPoint} - ${this.destination }
+            Station: ${ TrainStops[this.startingPoint] } - ${ TrainStops[this.destination] }
             Departure: ${ this.departureTime }
             Arrival: ${ arrivalTime }
         `);
@@ -60,8 +58,8 @@ class TicketSystem {
 
 class TrainTicket extends TicketSystem {
     constructor(
-        startingPoint: string,
-        destination: string,
+        startingPoint: TrainStops,
+        destination: TrainStops,
         departureTime: Date,
     ) {
         super(
@@ -131,7 +129,9 @@ class TrainTicket extends TicketSystem {
 
 const ticket = new TicketSystem(
     TransportTicketType.Train,
-    'Tainan',
-    'Kaohsiung',
+    TrainStops.Tainan,
+    TrainStops.Hsinchu,
     new Date(2019, 8, 1, 9, 0, 0),
 );
+
+ticket.getTicketInfo();
