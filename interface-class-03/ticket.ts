@@ -23,7 +23,55 @@ enum TrainStops {
 
 let a = [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }];
 
-class TrainTicket {
+class TicketSystem {
+    constructor(
+        private type: TransportTicketType,
+        private startingPoint: string,
+        private destination: string,
+        private departureTime: Date,
+    ) { }
+
+    protected deriveDuration(): TimeFormat {
+        return [1, 0, 0];
+    }
+
+    private deriveArrivalTime(): Date {
+        const { departureTime } = this;
+        const [hours, minutes, seconds] = this.deriveDuration();
+        const durationSeconds = hours * 60 * 60 + minutes * 60 + seconds;
+        const durationMilliseconds = durationSeconds * 1000;
+        const arrivalMilliseconds = departureTime.getTime() + durationMilliseconds;
+
+        return new Date(arrivalMilliseconds);
+    }
+
+    public getTicketInfo() {
+        const ticketName = TransportTicketType[this.type];
+        const arrivalTime = this.deriveArrivalTime();
+
+        console.log(`
+            Ticket Type: ${ ticketName }
+            Station: ${ this.startingPoint} - ${this.destination }
+            Departure: ${ this.departureTime }
+            Arrival: ${ arrivalTime }
+        `);
+    }
+}
+
+class TrainTicket extends TicketSystem {
+    constructor(
+        startingPoint: string,
+        destination: string,
+        departureTime: Date,
+    ) {
+        super(
+            TransportTicketType.Train,
+            startingPoint,
+            destination,
+            departureTime,
+        );
+    }
+
     private trainStationsDetail: Map<TrainStops, TrainStation> = new Map([
         [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }],
         [TrainStops.Kaohsiung, { nextStop: TrainStops.Tainan, duration: [1, 45, 30] }],
@@ -32,7 +80,7 @@ class TrainTicket {
         [TrainStops.Hsinchu, { nextStop: TrainStops.Taipei, duration: [1, 30, 30] }],
     ]);
 
-    private deriveDuration(): TimeFormat {
+    protected deriveDuration(): TimeFormat {
         const { startingPoint, destination } = this;
 
         if (!this.isStopExist([startingPoint, destination])) {
@@ -78,41 +126,6 @@ class TrainTicket {
         temp[1] %= 60;
 
         return temp;
-    }
-}
-
-class TicketSystem {
-    constructor(
-        private type: TransportTicketType,
-        private startingPoint: string,
-        private destination: string,
-        private departureTime: Date,
-    ) { }
-
-    private deriveDuration(): TimeFormat {
-        return [1, 0, 0];
-    }
-
-    private deriveArrivalTime(): Date {
-        const { departureTime } = this;
-        const [hours, minutes, seconds] = this.deriveDuration();
-        const durationSeconds = hours * 60 * 60 + minutes * 60 + seconds;
-        const durationMilliseconds = durationSeconds * 1000;
-        const arrivalMilliseconds = departureTime.getTime() + durationMilliseconds;
-
-        return new Date(arrivalMilliseconds);
-    }
-
-    public getTicketInfo() {
-        const ticketName = TransportTicketType[this.type];
-        const arrivalTime = this.deriveArrivalTime();
-
-        console.log(`
-            Ticket Type: ${ ticketName }
-            Station: ${ this.startingPoint} - ${this.destination }
-            Departure: ${ this.departureTime }
-            Arrival: ${ arrivalTime }
-        `);
     }
 }
 
