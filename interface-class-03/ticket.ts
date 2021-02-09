@@ -7,7 +7,7 @@ enum TransportTicketType {
 type TimeFormat = [number, number, number];
 
 type TrainStation = {
-    name: TrainStops,
+    // name: TrainStops,
     nextStop: TrainStops,
     duration: TimeFormat,
 };
@@ -24,19 +24,60 @@ enum TrainStops {
 let a = [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }];
 
 class TrainTicket {
-    private trainStationsDetail: Map<TrainStation> = new Map([
+    private trainStationsDetail: Map<TrainStops, TrainStation> = new Map([
         [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }],
-        { name: TrainStops.Kaohsiung, nextStop: TrainStops.Tainan, duration: [1, 45, 30] },
-        { name: TrainStops.Tainan, nextStop: TrainStops.Taichung, duration: [3, 20, 0] },
-        { name: TrainStops.Taichung, nextStop: TrainStops.Hsinchu, duration: [2, 30, 30] },
-        { name: TrainStops.Hsinchu, nextStop: TrainStops.Taipei, duration: [1, 30, 30] },
+        [TrainStops.Kaohsiung, { nextStop: TrainStops.Tainan, duration: [1, 45, 30] }],
+        [TrainStops.Tainan, { nextStop: TrainStops.Taichung, duration: [3, 20, 0] }],
+        [TrainStops.Taichung, { nextStop: TrainStops.Hsinchu, duration: [2, 30, 30] }],
+        [TrainStops.Hsinchu, { nextStop: TrainStops.Taipei, duration: [1, 30, 30] }],
     ]);
 
     private deriveDuration(): TimeFormat {
         const { startingPoint, destination } = this;
-        let time: TimeFormat = [0, 0, 0];
 
-        return time;
+        if (!this.isStopExist([startingPoint, destination])) {
+            throw new Error("Wrong stop! Please check again!");
+        }
+
+        let time: TimeFormat = [0, 0, 0];
+        let isStopFound = false;
+
+        for (const [stationName, detail] of this.trainStationsDetail.entries()) {
+            if (!isStopFound && stationName === startingPoint) {
+                isStopFound = true;
+                time = this.addTime(time, detail.duration);
+            } else if (isStopFound) {
+                time = this.addTime(time, detail.duration);
+
+                if (detail.nextStop === destination) break;
+            }
+        }
+
+        return this.convertTime(time);
+    }
+
+    private isStopExist(stops: TrainStops[]): boolean {
+        return stops.every(stop => this.trainStationsDetail.has(stop));
+    }
+
+    private addTime(time: TimeFormat, duration: TimeFormat): TimeFormat {
+        let temp = time;
+        temp[0] += duration[0];
+        temp[1] += duration[1];
+        temp[2] += duration[2];
+
+        return temp;
+    }
+
+    private convertTime(time: TimeFormat): TimeFormat {
+        let temp = time;
+
+        temp[1] += ~~(temp[2] / 60);
+        temp[2] %= 60;
+        temp[0] += ~~(temp[1] / 60);
+        temp[1] %= 60;
+
+        return temp;
     }
 }
 
