@@ -4,37 +4,38 @@ let tdz: string;
 
 let absolutelyEitherNullOrString: string | null = null;
 
-absolutelyEitherNullOrString = 'string';
+absolutelyEitherNullOrString = "string";
 absolutelyEitherNullOrString = null;
 
+// Cannot redeclare block-scoped variable 'name'.
 // block-scope
-let name: string = 'ad';
+let name: string = "ad";
 
 let nestedObj = {
-    prop: 'Hello',
+    prop: "Hello",
     child: {
         prop1: 1,
-        prop2: false
-    }
+        prop2: false,
+    },
 };
 
-let obj2 = { ...nestedObj, hi: '123' };
+let obj2 = { ...nestedObj, hi: "123" };
 
 // Object annotation
 
-let justAnObj: object = { hello: 'World' };
+let justAnObj: object = { hello: "World" };
 
 // justAnObj.hello
 
-justAnObj = { hi: 'There' };
+justAnObj = { hi: "There" };
 
 // justAnObj.hi
+// Type 'number' is not assignable to type 'object'.
+justAnObj = 123;
 
-justAnObj = 123
+justAnObj = [1, "2", true, { hello: "Go" }];
 
-justAnObj = [1, '2', true, { hello: 'Go' }];
-
-justAnObj = function () { };
+justAnObj = function () {};
 
 justAnObj = new Object();
 
@@ -45,17 +46,16 @@ let f1 = function f1() {
 };
 
 let f2 = function f2(): undefined {
-    return undefined
+    return undefined;
 };
 
-let f3 = function f3(): undefined {
-
-};
+// A function whose declared type is neither 'void' nor 'any' must return a value
+let f3 = function f3(): undefined {};
 
 // @ @ !
 let f4 = function f4(): void {
     return undefined;
-}
+};
 
 // Array
 let canBeEitherNullOrNumbers: (number | null)[] = [1, 2, 4];
