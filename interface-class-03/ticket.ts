@@ -2,14 +2,14 @@ enum TransportTicketType {
     Train,
     MRT,
     Aviation,
-};
+}
 
 type TimeFormat = [number, number, number];
 
 type TrainStation = {
     // name: TrainStops,
-    nextStop: TrainStops,
-    duration: TimeFormat,
+    nextStop: TrainStops;
+    duration: TimeFormat;
 };
 
 enum TrainStops {
@@ -18,16 +18,16 @@ enum TrainStops {
     Tainan,
     Taichung,
     Hsinchu,
-    Taipei
-};
+    Taipei,
+}
 
 class TicketSystem {
     constructor(
         private type: TransportTicketType,
         protected startingPoint: TrainStops,
         protected destination: TrainStops,
-        private departureTime: Date,
-    ) { }
+        private departureTime: Date
+    ) {}
 
     protected deriveDuration(): TimeFormat {
         return [1, 0, 0];
@@ -38,7 +38,8 @@ class TicketSystem {
         const [hours, minutes, seconds] = this.deriveDuration();
         const durationSeconds = hours * 60 * 60 + minutes * 60 + seconds;
         const durationMilliseconds = durationSeconds * 1000;
-        const arrivalMilliseconds = departureTime.getTime() + durationMilliseconds;
+        const arrivalMilliseconds =
+            departureTime.getTime() + durationMilliseconds;
 
         return new Date(arrivalMilliseconds);
     }
@@ -48,10 +49,12 @@ class TicketSystem {
         const arrivalTime = this.deriveArrivalTime();
 
         console.log(`
-            Ticket Type: ${ ticketName }
-            Station: ${ TrainStops[this.startingPoint] } - ${ TrainStops[this.destination] }
-            Departure: ${ this.departureTime }
-            Arrival: ${ arrivalTime }
+            Ticket Type: ${ticketName}
+            Station: ${TrainStops[this.startingPoint]} - ${
+            TrainStops[this.destination]
+        }
+            Departure: ${this.departureTime}
+            Arrival: ${arrivalTime}
         `);
     }
 }
@@ -60,35 +63,53 @@ class TrainTicket extends TicketSystem {
     constructor(
         startingPoint: TrainStops,
         destination: TrainStops,
-        departureTime: Date,
+        departureTime: Date
     ) {
         super(
             TransportTicketType.Train,
             startingPoint,
             destination,
-            departureTime,
+            departureTime
         );
     }
 
     private trainStationsDetail: Map<TrainStops, TrainStation> = new Map([
-        [TrainStops.Pingtung, { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] }],
-        [TrainStops.Kaohsiung, { nextStop: TrainStops.Tainan, duration: [1, 45, 30] }],
-        [TrainStops.Tainan, { nextStop: TrainStops.Taichung, duration: [3, 20, 0] }],
-        [TrainStops.Taichung, { nextStop: TrainStops.Hsinchu, duration: [2, 30, 30] }],
-        [TrainStops.Hsinchu, { nextStop: TrainStops.Taipei, duration: [1, 30, 30] }],
+        [
+            TrainStops.Pingtung,
+            { nextStop: TrainStops.Kaohsiung, duration: [2, 30, 0] },
+        ],
+        [
+            TrainStops.Kaohsiung,
+            { nextStop: TrainStops.Tainan, duration: [1, 45, 30] },
+        ],
+        [
+            TrainStops.Tainan,
+            { nextStop: TrainStops.Taichung, duration: [3, 20, 0] },
+        ],
+        [
+            TrainStops.Taichung,
+            { nextStop: TrainStops.Hsinchu, duration: [2, 30, 30] },
+        ],
+        [
+            TrainStops.Hsinchu,
+            { nextStop: TrainStops.Taipei, duration: [1, 30, 30] },
+        ],
     ]);
 
     protected deriveDuration(): TimeFormat {
         const { startingPoint, destination } = this;
 
         if (!this.isStopExist([startingPoint, destination])) {
-            throw new Error("Wrong stop! Please check again!");
+            throw new Error('Wrong stop! Please check again!');
         }
 
         let time: TimeFormat = [0, 0, 0];
         let isStopFound = false;
 
-        for (const [stationName, detail] of this.trainStationsDetail.entries()) {
+        for (const [
+            stationName,
+            detail,
+        ] of this.trainStationsDetail.entries()) {
             if (!isStopFound && stationName === startingPoint) {
                 isStopFound = true;
                 time = this.addTime(time, detail.duration);
@@ -103,7 +124,7 @@ class TrainTicket extends TicketSystem {
     }
 
     private isStopExist(stops: TrainStops[]): boolean {
-        return stops.every(stop => this.trainStationsDetail.has(stop));
+        return stops.every((stop) => this.trainStationsDetail.has(stop));
     }
 
     private addTime(time: TimeFormat, duration: TimeFormat): TimeFormat {
@@ -131,7 +152,7 @@ const ticket = new TicketSystem(
     TransportTicketType.Train,
     TrainStops.Tainan,
     TrainStops.Hsinchu,
-    new Date(2019, 8, 1, 9, 0, 0),
+    new Date(2019, 8, 1, 9, 0, 0)
 );
 
 ticket.getTicketInfo();

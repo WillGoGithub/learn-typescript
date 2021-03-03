@@ -11,7 +11,7 @@ class Horse {
         public name: string,
         public color: Color,
         public readonly type: string,
-        private noise: string = "..."
+        private noise: string = '...'
     ) {}
 
     public makeNoise() {
@@ -27,7 +27,7 @@ class Horse {
     }
 }
 
-let horse = new Horse("A", Color.Black, "Stallion");
+let horse = new Horse('A', Color.Black, 'Stallion');
 console.log(horse);
 
 // Type 'null' is not assignable to type 'Horse'.
@@ -35,7 +35,7 @@ console.log(horse);
 
 class Unicorn extends Horse {
     constructor(name: string) {
-        super(name, Color.Rainbow, "Unicorn", "Noise");
+        super(name, Color.Rainbow, 'Unicorn', 'Noise');
     }
 
     public puke() {
@@ -47,8 +47,8 @@ class Unicorn extends Horse {
     }
 }
 
-let unicorn = new Unicorn("Max");
-let another: Horse = new Unicorn("Mix");
+let unicorn = new Unicorn('Max');
+let another: Horse = new Unicorn('Mix');
 
 unicorn.puke();
 // Property 'puke' does not exist on type 'Horse'.
@@ -56,11 +56,11 @@ unicorn.puke();
 
 class Stallion extends Horse {
     constructor(name: string) {
-        super(name, Color.Brown, "Stallion");
+        super(name, Color.Brown, 'Stallion');
     }
 }
 
-let stallion: Stallion = new Horse("Sta", Color.Brown, "Stallion");
+let stallion: Stallion = new Horse('Sta', Color.Brown, 'Stallion');
 
 // 定義兩種存取權限相等的類別
 class C1 {
@@ -79,7 +79,7 @@ class C2 {
     }
 }
 
-let some: C1 = new C2("Hello");
+let some: C1 = new C2('Hello');
 
 // 定義存取權限不等的類別
 class C1Private {
@@ -106,4 +106,4 @@ class C2Private {
     }
 }
 
-let another: C1Private = new C2Private("Hello", 2);
+let another: C1Private = new C2Private('Hello', 2);

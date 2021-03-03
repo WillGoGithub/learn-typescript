@@ -4,36 +4,36 @@ let tdz: string;
 
 let absolutelyEitherNullOrString: string | null = null;
 
-absolutelyEitherNullOrString = "string";
+absolutelyEitherNullOrString = 'string';
 absolutelyEitherNullOrString = null;
 
 // Cannot redeclare block-scoped variable 'name'.
 // block-scope
-let name: string = "ad";
+let name: string = 'ad';
 
 let nestedObj = {
-    prop: "Hello",
+    prop: 'Hello',
     child: {
         prop1: 1,
         prop2: false,
     },
 };
 
-let obj2 = { ...nestedObj, hi: "123" };
+let obj2 = { ...nestedObj, hi: '123' };
 
 // Object annotation
 
-let justAnObj: object = { hello: "World" };
+let justAnObj: object = { hello: 'World' };
 
 // justAnObj.hello
 
-justAnObj = { hi: "There" };
+justAnObj = { hi: 'There' };
 
 // justAnObj.hi
 // Type 'number' is not assignable to type 'object'.
 justAnObj = 123;
 
-justAnObj = [1, "2", true, { hello: "Go" }];
+justAnObj = [1, '2', true, { hello: 'Go' }];
 
 justAnObj = function () {};
 

@@ -1,4 +1,4 @@
-const message = "Hello World";
+const message = 'Hello World';
 
 function say(something: string): void {
     console.log(something);
