@@ -5,4 +5,5 @@ enum Role {
     BountyHunter,
     Monster,
 }
+
 export default Role;
