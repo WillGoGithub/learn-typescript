@@ -1,7 +1,11 @@
 import Role from './Role';
-
+import Attack from '../abilities/Attack';
 export default class Character {
-    constructor(public readonly name: string, public readonly role: Role) {}
+    constructor(
+        public readonly name: string,
+        public readonly role: Role,
+        private attackRef: Attack
+    ) {}
 
     public introduce() {
         console.log(`
@@ -10,6 +14,6 @@ export default class Character {
     }
 
     public attack(target: Character) {
-        console.log(`${this.name} attacks ${target.name} using the sword!`);
+        this.attackRef.attack(this, target);
     }
 }

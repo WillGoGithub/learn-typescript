@@ -5,9 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Role_1 = __importDefault(require("./Role"));
 class Character {
-    constructor(name, role) {
+    constructor(name, role, attackRef) {
         this.name = name;
         this.role = role;
+        this.attackRef = attackRef;
     }
     introduce() {
         console.log(`
@@ -15,7 +16,7 @@ class Character {
         `);
     }
     attack(target) {
-        console.log(`${this.name} attacks ${target.name} using the sword!`);
+        this.attackRef.attack(this, target);
     }
 }
 exports.default = Character;
