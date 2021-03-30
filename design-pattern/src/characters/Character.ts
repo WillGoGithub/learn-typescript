@@ -8,4 +8,8 @@ export default class Character {
             Hi, I'm ${this.name} the ${Role[this.role]}!
         `);
     }
+
+    public attack(target: Character) {
+        console.log(`${this.name} attacks ${target.name} using the sword!`);
+    }
 }
