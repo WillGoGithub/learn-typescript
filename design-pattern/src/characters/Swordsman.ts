@@ -1,9 +1,9 @@
 import Role from './Role';
 import Character from './Character';
-import MeleeAttack from '../abilities/MeleeAttack';
+import BasicSword from '../weapons/Dagger';
 
 export default class Swordsman extends Character {
     constructor(name: string) {
-        super(name, Role.Swordsman, new MeleeAttack());
+        super(name, Role.Swordsman, new BasicSword());
     }
 }

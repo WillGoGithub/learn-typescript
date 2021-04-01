@@ -6,7 +6,7 @@
     "start:watch": "npx tsc -w",
     "start:run": "nodemon build/%npm_config_file%",
     "start": "concurrently npm:start:* --file=%npm_config_file%",
-    "serve-sp": "npm run start --file=characters/index.js"
+    "serve-sp": "npm run start --file=index.js"
   },
   "keywords": [],
   "author": "",
