@@ -1,0 +1,3 @@
+-   Factory Method
+-   每選擇某項策略時，都需要 import 造成不便及程式碼冗長
+-   使用 Factory 統一建構

@@ -1,16 +1,20 @@
 /*
  * SingletonPerson 為使用單例模式的類別。
- * 單例模式的實踐方法 —— 必須具備私有建構子，防止外部的人私自建構更多該類別的物件
+ * 單例模式的實踐方法 —— 必須具備私有建構子，
+ * 防止外部的人私自建構更多該類別的物件
  */
 class SingletonPerson {
     private constructor(
         public readonly name: string,
         public readonly age: number,
-        public readonly hasPet: boolean,
-    ) { }
+        public readonly hasPet: boolean
+    ) {}
 
-    private static Instance: SingletonPerson =
-        new SingletonPerson('Will', 20, false);
+    private static Instance: SingletonPerson = new SingletonPerson(
+        'Will',
+        20,
+        false
+    );
 
     static getInstance(): SingletonPerson {
         return this.Instance;
@@ -31,8 +35,8 @@ class LazySingletonPerson {
     private constructor(
         public readonly name: string,
         public readonly age: number,
-        public readonly hasPet: boolean,
-    ) { }
+        public readonly hasPet: boolean
+    ) {}
 
     private static Instance: LazySingletonPerson | null = null;
 

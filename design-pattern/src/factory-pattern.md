@@ -1,0 +1,5 @@
+-   Strategy 策略模式
+-   解決 switch case 冗長問題 (相似行為)
+-   解決 switch 擴充問題
+-   利用 class 賦值方式切換子 class
+-   一個工廠類別 Factory 會對應一個 Product 類別

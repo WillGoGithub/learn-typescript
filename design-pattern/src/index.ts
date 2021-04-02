@@ -1,10 +1,12 @@
 import Swordsman from './characters/Swordsman';
 import Warlock from './characters/Warlock';
-import Dagger from './weapons/Dagger';
-import BasicWand from './weapons/BasicSword';
+
+import Weapons from './weapons/Weapons';
+import WeaponFactory from './weapons/WeaponFactory';
 
 const swordsman = new Swordsman('Jack');
 const warlock = new Warlock('Leon');
+const weaponFactory = new WeaponFactory();
 
 swordsman.introduce();
 warlock.introduce();
@@ -12,12 +14,14 @@ warlock.introduce();
 swordsman.attack(warlock);
 warlock.attack(swordsman);
 
-swordsman.equip(new Dagger());
-
+const dagger = weaponFactory.createWeapon(Weapons.Dagger);
+swordsman.equip(dagger);
 swordsman.attack(warlock);
 
+const basicWand = weaponFactory.createWeapon(Weapons.BasicWand);
+
 try {
-    swordsman.equip(new BasicWand());
+    swordsman.equip(basicWand);
 } catch (err) {
     console.log(err);
 }
