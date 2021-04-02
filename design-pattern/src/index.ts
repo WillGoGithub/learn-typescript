@@ -21,7 +21,7 @@ swordsman.attack(warlock);
 const basicWand = weaponFactory.createWeapon(Weapons.BasicWand);
 
 try {
-    swordsman.equip(basicWand);
+    // swordsman.equip(basicWand);
 } catch (err) {
     console.log(err);
 }

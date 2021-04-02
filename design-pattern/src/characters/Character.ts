@@ -1,35 +1,42 @@
 import Role from './Role';
-import Attack from '../abilities/Attack';
 import Weapon from '../weapons/Weapon';
+import Armour from '../armours/Armour';
+import Equipment from '../equipments/Equipment';
 export default class Character {
-    private attackRef: Attack;
-
     constructor(
         public readonly name: string,
         public readonly role: Role,
-        private weaponRef: Weapon
-    ) {
-        this.attackRef = weaponRef.attackStrategy;
-    }
+        private weaponRef: Weapon,
+        private armourRef: Armour
+    ) {}
 
     public introduce() {
         console.log(`
             Hi, I'm ${this.name} the ${Role[this.role]}!
         `);
     }
-    public equip(weapon: Weapon) {
-        const { availableRoles: roles } = weapon;
+    public equip(equipment: Equipment) {
+        const { availableRoles: roles } = equipment;
 
-        if (roles.length === 0 || roles.includes(this.role)) {
-            console.log(`${this.name} has equipped with "${weapon.name}".`);
-            this.weaponRef = weapon;
-            this.attackRef = this.weaponRef.attackStrategy;
-        } else {
+        if (roles.length != 0 && !roles.includes(this.role)) {
             throw new Error(`${this.role} cannot equip the ${this.name}.`);
         }
+
+        switch (true) {
+            case equipment instanceof Weapon:
+                this.weaponRef = equipment as Weapon;
+                break;
+            case equipment instanceof Armour:
+                this.armourRef = equipment as Armour;
+                break;
+            default:
+                throw new Error(`Nonidentity equipment.`);
+        }
+
+        console.log(`${this.name} has equipped with "${equipment.name}".`);
     }
 
     public attack(target: Character) {
-        this.attackRef.attack(this, target);
+        this.weaponRef.attack(this, target);
     }
 }
