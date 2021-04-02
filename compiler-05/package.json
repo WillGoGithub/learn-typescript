@@ -1,0 +1,16 @@
+{
+  "name": "compiler-05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "clear && tsc && lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "lite-server": "^2.6.1"
+  }
+}

@@ -3,3 +3,5 @@ $ npm init -y
 
 // 下載一些模組
 $ npm install concurrently nodemon --save-dev
+
+// Favour Object Composition Over Class Inheritance
