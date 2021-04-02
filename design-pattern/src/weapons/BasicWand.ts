@@ -1,10 +1,9 @@
 import Weapon from './Weapon';
-import StabAttack from '../abilities/StabAttack';
+import Role from '../characters/Role';
+import MagicAttack from '../abilities/MagicAttack';
 
-export default class Dagger implements Weapon {
-    public readonly name = 'Dagger';
-
-    public attackStrategy = new StabAttack();
-
-    public availableRoles = [];
+export default class BasicWand extends Weapon {
+    public readonly name = 'Basic Wand';
+    public availableRoles = [Role.Warlock];
+    public attackStrategy = new MagicAttack();
 }

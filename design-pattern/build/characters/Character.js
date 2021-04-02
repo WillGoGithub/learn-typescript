@@ -16,9 +16,6 @@ class Character {
             Hi, I'm ${this.name} the ${Role_1.default[this.role]}!
         `);
     }
-    attack(target) {
-        this.attackRef.attack(this, target);
-    }
     equip(weapon) {
         const { availableRoles: roles } = weapon;
         if (roles.length === 0 || roles.includes(this.role)) {
@@ -29,6 +26,9 @@ class Character {
         else {
             throw new Error(`${this.role} cannot equip the ${this.name}.`);
         }
+    }
+    attack(target) {
+        this.attackRef.attack(this, target);
     }
 }
 exports.default = Character;
