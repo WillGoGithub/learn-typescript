@@ -12,7 +12,7 @@
     "start:watch": "npx tsc -w",
     "start:run": "nodemon build/%npm_config_file%",
     "start": "concurrently npm:start:* --file=%npm_config_file%",
-    "serve": "npm run start --file=binary-tree.js"
+    "serve": "npm run start --file=es2015Plus.js"
   },
   "keywords": [],
   "author": "",
