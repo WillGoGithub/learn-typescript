@@ -1,3 +1,5 @@
+import { MyArray, MyIterable, MyIterator, NormalIterator } from './iterator';
+
 interface LinkedListNode<T> {
   value: T;
   next: LinkedListNode<T> | null;
@@ -120,3 +122,40 @@ l.getInfo();
 
 // unknown
 const a = new GenericLinkedList();
+
+class IterableLinkedList<T>
+  extends GenericLinkedList<T>
+  implements MyIterable<T> {
+  public createIterator(): MyIterator<T> {
+    const elements: Array<T> = [];
+
+    let currentNode = this.head;
+
+    while (currentNode !== null) {
+      elements.push(currentNode.value);
+      currentNode = currentNode.next;
+    }
+
+    return new NormalIterator(elements);
+  }
+}
+
+function foreach<T>(iter: MyIterator<T>, callback: (v: T) => void) {
+  while (!iter.isDone()) {
+    callback(iter.currentItem as T);
+    iter.next();
+  }
+}
+
+let collection1 = new MyArray<number>([1, 2, 3]);
+let collection2 = new IterableLinkedList<number>();
+
+collection2.insert(0, 1);
+collection2.insert(1, 2);
+collection2.insert(2, 3);
+
+let iter1 = collection1.createIterator();
+let iter2 = collection2.createIterator();
+
+foreach(iter1, (v) => console.log(`v from collection1: ${v}`));
+foreach(iter2, (v) => console.log(`v from collection2: ${v}`));

@@ -8,10 +8,10 @@ interface PersonalInfo {
   hasPet?: boolean;
 }
 
-let incompletePersonalInfo: Required<PersonalInfo> = {
-  name: 'A',
-  age: 20,
-};
+// let incompletePersonalInfo: Required<PersonalInfo> = {
+//   name: 'A',
+//   age: 20,
+// };
 
 // Default Type Parameter
 type DefaultStringDictionary<T = string> = {

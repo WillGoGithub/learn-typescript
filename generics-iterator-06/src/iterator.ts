@@ -1,14 +1,14 @@
-interface MyIterator<T> {
+export interface MyIterator<T> {
   next(): void;
   isDone(): boolean;
   currentItem: T | null;
 }
 
-interface MyIterable<T> {
+export interface MyIterable<T> {
   createIterator(): MyIterator<T>;
 }
 
-class NormalIterator<T> implements MyIterator<T> {
+export class NormalIterator<T> implements MyIterator<T> {
   public currentItem: T | null = null;
   private currentIndex = 0;
 
@@ -30,7 +30,7 @@ class NormalIterator<T> implements MyIterator<T> {
   }
 }
 
-class MyArray<T> implements MyIterable<T> {
+export class MyArray<T> implements MyIterable<T> {
   constructor(public items: Array<T>) {}
 
   createIterator() {
