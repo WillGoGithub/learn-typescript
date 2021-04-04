@@ -1,0 +1,19 @@
+{
+  "name": "iterator-07",
+  "version": "1.0.0",
+  "description": "",
+  "main": "iterator.js",
+  "dependencies": {
+    "concurrently": "^6.0.0",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start:watch": "npx tsc -w",
+    "start:run": "nodemon build/%npm_config_file%",
+    "start": "concurrently npm:start:* --file=iterator.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

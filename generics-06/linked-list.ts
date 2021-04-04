@@ -115,5 +115,8 @@ l.insert(2, 789);
 l.insert(1, 12321);
 l.getInfo();
 
+l.remove(1);
+l.getInfo();
+
 // unknown
 const a = new GenericLinkedList();
